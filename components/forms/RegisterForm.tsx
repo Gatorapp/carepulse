@@ -3,28 +3,30 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Form, FormControl } from "@/components/ui/form"
 import CustomFormField from "../CustomFormField"
+import { Form, FormControl } from "@/components/ui/form"
 import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { PatientFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation"
 import { registerPatient } from "@/lib/actions/patient.actions"
-import { FormFieldType } from "./PatientForm"
-
-import { Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues } from "@/constants"
-
-import { Label } from "@radix-ui/react-label"
-import { SelectItem } from "@/components/ui/select"
-import Image from "next/image"
-import FileUploader from "../ui/FileUploader"
+import PatientForm, { FormFieldType } from "./PatientForm"
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group"
 
+import { 
+  Doctors, 
+  GenderOptions, 
+  IdentificationTypes, 
+  PatientFormDefaultValues 
+} from "@/constants"
 
 
+import { Label } from "../ui/label"
+import { SelectItem } from "@/components/ui/select"
+import Image from "next/image"
+import FileUploader from "../FileUploader"
 
 
- 
 const RegisterForm = ({ user }: {user: User}) => {
     const router = useRouter();
 const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +68,7 @@ const [isLoading, setIsLoading] = useState(false);
         birthDate: new Date(values.birthDate),
         identificationDocument: formData,
       }
-            // @ts-expect-error
+            // @ts-ignore
       const patient = await registerPatient(patientData);
          
       if (patient) router.push(`/patients/${user.$id}/new-appointment`)  
@@ -171,7 +173,7 @@ const [isLoading, setIsLoading] = useState(false);
     <CustomFormField 
     fieldType={FormFieldType.INPUT}
        control={form.control}
-       name="emergencycontact"
+       name="emergencyContactName"
        label="Emergency Contact"
        placeholder="Guardian's Name"
     />
@@ -291,7 +293,7 @@ const [isLoading, setIsLoading] = useState(false);
     <CustomFormField 
     fieldType={FormFieldType.SKELETON}
        control={form.control}
-       name="identificationDocument"
+       name="identificationDocumentId"
        label="Scanned copy of identification document"
        renderSkeleton={(field) => (
          <FormControl>
