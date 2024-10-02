@@ -20,7 +20,6 @@ export const createAppointment = async (appointment: CreateAppointmentParams) =>
         console.log(error);
     }
 }
-
 export const getAppointment = async (appointmentId: string) => {
     try {
         const appointment = await databases.getDocument(
@@ -34,7 +33,6 @@ export const getAppointment = async (appointmentId: string) => {
         console.log(error);
     }
 }
-
 export const getRecentAppointmentList = async () => {
     try {
        const appointments = await databases.listDocuments(
@@ -72,7 +70,6 @@ export const getRecentAppointmentList = async () => {
         
     }
 }
-
 export const updateAppointment = async ({ appointmentId, userId, appointment, type }:
 UpdateAppointmentParams) => {
     try {
@@ -104,7 +101,6 @@ UpdateAppointmentParams) => {
       console.log(error)  
     }
 }
-
 export const sendSMSNotification = async (userId: string, content: string) => {
     try {
       const message = messaging.createSms(

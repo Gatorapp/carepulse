@@ -1,9 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
- 
-import { Button } from "@/components/ui/button"
+
 import StatusBadge from "../StatusBadge"
 import { formatDateTime } from "@/lib/utils"
 import Image from "next/image"
@@ -47,12 +45,14 @@ export const columns: ColumnDef<Appointment>[] = [
         accessorKey: "primaryPhysician",
         header: () => 'Doctor',
         cell: ({ row }) => {
-            const doctor = Doctors.find((doc) => doc.name === row.original.primaryPhysician)
+            const doctor = Doctors.find(
+              (doc) => doc.name === row.original.primaryPhysician);
 
             return (
                 <div className="flex items-center gap-3">
-                  <Image src={doctor?.image}
-                  alt={doctor.name}
+                  <Image 
+                  src={doctor?.image}
+                  alt={doctor?.name || "doctor"}
                   width={100}
                   height={100}
                   className="size-8"                 

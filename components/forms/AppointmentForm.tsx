@@ -10,7 +10,6 @@ import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import {  getAppointmentSchema } from "@/lib/validation"
 import { useRouter } from "next/navigation"
-import { createUser } from "@/lib/actions/patient.actions"
 import { FormFieldType } from "./PatientForm"
 import { SelectItem } from "../ui/select"
 import { Doctors } from "@/constants"
@@ -83,20 +82,21 @@ const AppointmentForm = ({
 
         if (appointment) {
             form.reset();
-            router.push(`/patients/${userId}/new-appointment/success?appointmentId=$
-                {appointment.$id}`)
+            router.push(
+              `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`
+            );
         }        
         }else {
           const appointmentToUpdate ={
             userId,
-            appointmentId: appointment?.$id!,
+            appointmentId: appointment?.$id! ,
             appointment: {
               primaryPhysician: values?.primaryPhysician,
               schedule: new Date(values?.schedule),
               status: status as Status,
               cancellationReason: values?.cancellationReason,
             },
-            type
+            type,
           }
           const updatedAppointment = await updateAppointment(appointmentToUpdate);
 
